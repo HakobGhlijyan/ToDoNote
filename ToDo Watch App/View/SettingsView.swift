@@ -8,25 +8,20 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("linecount") private var lineCount: Int = 1
-    @State private var value: Float = 1.0
-    
-    func update() {
-        lineCount = Int(value)
-    }
+    @StateObject private var vm = SettingsViewModel()
     
     var body: some View {
         VStack(spacing: 8.0) {
             HeaderView(title: "settings")
             
-            Text("Lines: \(lineCount)".uppercased())
+            Text("Lines: \(vm.appStorage.lineCount)".uppercased())
                 .bold()
             
             Slider(value: Binding(get: {
-                self.value
+                self.vm.value
             }, set: { newValue in
-                self.value = newValue
-                self.update()
+                self.vm.value = newValue
+                self.vm.update()
             }), in: 1...4, step: 1)
                 .foregroundStyle(.accent)
         }

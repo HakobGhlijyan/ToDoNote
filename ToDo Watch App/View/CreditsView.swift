@@ -10,11 +10,9 @@ import SwiftUI
 struct CreditsView: View {
     var body: some View {
         VStack(spacing: 3) {
-            Image("profile")
+            Image(systemName: "person.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(height: 100)
-                .clipShape(Circle())
                 .layoutPriority(1)
             
             HeaderView(title: "credits")

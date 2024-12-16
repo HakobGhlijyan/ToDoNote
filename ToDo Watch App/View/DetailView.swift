@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct DetailView: View {
+    @StateObject private var vm = DetailViewModel()
     let note: Note
     let count: Int
     let index: Int
-    
-    @State private var isCreditsPresented: Bool = false
-    @State private var isSettingsPresented: Bool = false
-    
+
     var body: some View {
         VStack(spacing: 3) {
             //Header
@@ -35,9 +33,9 @@ struct DetailView: View {
                 Image(systemName: "gear")
                     .imageScale(.large)
                     .onTapGesture {
-                        isSettingsPresented.toggle()
+                        vm.isSettingsPresented.toggle()
                     }
-                    .sheet(isPresented: $isSettingsPresented) {
+                    .sheet(isPresented: $vm.isSettingsPresented) {
                         SettingsView()
                     }
                 
@@ -48,9 +46,9 @@ struct DetailView: View {
                 Image(systemName: "info.circle")
                     .imageScale(.large)
                     .onTapGesture {
-                        isCreditsPresented.toggle()
+                        vm.isCreditsPresented.toggle()
                     }
-                    .sheet(isPresented: $isCreditsPresented) {
+                    .sheet(isPresented: $vm.isCreditsPresented) {
                         CreditsView()
                     }
             }
