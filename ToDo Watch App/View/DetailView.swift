@@ -13,6 +13,7 @@ struct DetailView: View {
     let index: Int
     
     @State private var isCreditsPresented: Bool = false
+    @State private var isSettingsPresented: Bool = false
     
     var body: some View {
         VStack(spacing: 3) {
@@ -33,9 +34,17 @@ struct DetailView: View {
             HStack(alignment: .center) {
                 Image(systemName: "gear")
                     .imageScale(.large)
+                    .onTapGesture {
+                        isSettingsPresented.toggle()
+                    }
+                    .sheet(isPresented: $isSettingsPresented) {
+                        SettingsView()
+                    }
+                
                 Spacer()
                 Text("\(index + 1) / \(count)")
                 Spacer()
+                
                 Image(systemName: "info.circle")
                     .imageScale(.large)
                     .onTapGesture {

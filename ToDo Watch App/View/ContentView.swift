@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var text: String = ""
     let urlPath: String = "notes"
     
+    @AppStorage("linecount") private var lineCount: Int = 1
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -62,7 +64,8 @@ struct ContentView: View {
                                         .frame(width: 4)
                                         .foregroundStyle(.accent)
                                     Text(notes[i].title)
-                                        .lineLimit(1)
+//                                        .lineLimit(1)
+                                        .lineLimit(lineCount)
                                         .padding(.leading, 5)
                                 }
                             }
