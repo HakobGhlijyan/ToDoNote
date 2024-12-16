@@ -6,8 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
-struct Note: Identifiable, Codable {
+@Model
+final class Note: Identifiable {
     var id: UUID
-    let title: String
+    var title: String
+    var date: Date
+    
+    init(title: String, date: Date = .now) {
+        self.id = UUID()
+        self.title = title
+        self.date = date
+    }
 }

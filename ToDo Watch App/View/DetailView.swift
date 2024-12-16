@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct DetailView: View {
-    @StateObject private var vm = DetailViewModel()
     let note: Note
     let count: Int
-    let index: Int
+    
+    @State private var isCreditsPresented: Bool = false
+    @State private var isSettingsPresented: Bool = false
 
     var body: some View {
         VStack(spacing: 3) {
@@ -33,22 +34,23 @@ struct DetailView: View {
                 Image(systemName: "gear")
                     .imageScale(.large)
                     .onTapGesture {
-                        vm.isSettingsPresented.toggle()
+                        isSettingsPresented.toggle()
                     }
-                    .sheet(isPresented: $vm.isSettingsPresented) {
+                    .sheet(isPresented: $isSettingsPresented) {
                         SettingsView()
                     }
                 
                 Spacer()
-                Text("\(index + 1) / \(count)")
+                Text("\(note.date.formatted(date: .omitted, time: .omitted))")
+                    .font(.footnote)
                 Spacer()
                 
                 Image(systemName: "info.circle")
                     .imageScale(.large)
                     .onTapGesture {
-                        vm.isCreditsPresented.toggle()
+                        isCreditsPresented.toggle()
                     }
-                    .sheet(isPresented: $vm.isCreditsPresented) {
+                    .sheet(isPresented: $isCreditsPresented) {
                         CreditsView()
                     }
             }
@@ -59,5 +61,5 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView(note: Note(id: UUID(), title: "Hello , Hakob"), count: 5, index: 1)
+    DetailView(note: Note(title: "Hello , Hakob"), count: 5)
 }

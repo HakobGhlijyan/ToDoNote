@@ -12,6 +12,7 @@ struct ToDo_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .modelContainer(for: Note.self)
         }
     }
 }
